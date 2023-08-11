@@ -1,8 +1,10 @@
+//Código en html, coenctado con apps scripts para mostrar una tabla determinada de google sheets en una pagina de google
 <!DOCTYPE html>
 <html>
   <head>
     <base target="_top">
     <style>
+      
       /* Estilos personalizados para mejorar la apariencia */
       body {
         font-family: Arial, sans-serif;
@@ -18,9 +20,7 @@
       button {
         margin-top: 20px;
       }
-
-
-
+      
        /* Coloca aquí tus estilos CSS personalizados */
       table {
         border-collapse: collapse;
@@ -56,8 +56,6 @@
         var filterValues = filter1; // + ',' + filter2 + ',' + filter3;
 
          google.script.run.withSuccessHandler().showTableWithDesign();
-
-        
       }
       google.script.run.withSuccessHandler(showData).getDataFromSheet();
 
