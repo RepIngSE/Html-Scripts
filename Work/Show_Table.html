@@ -1,0 +1,83 @@
+//Código en html, coenctado con apps scripts para mostrar una tabla determinada de google sheets en una pagina de google
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+    <style>
+      
+      /* Estilos personalizados para mejorar la apariencia */
+      body {
+        font-family: Arial, sans-serif;
+        padding: 20px;
+      }
+      h1 {
+        margin-bottom: 20px;
+      }
+      label {
+        display: block;
+        margin-bottom: 10px;
+      }
+      button {
+        margin-top: 20px;
+      }
+      
+       /* Coloca aquí tus estilos CSS personalizados */
+      table {
+        border-collapse: collapse;
+        width: 100%;
+      }
+      th, td {
+        border: 1px solid black;
+        padding: 8px;
+        text-align: center;
+      }
+      th {
+        background-color: #f2f2f2;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Filtros Personalizados</h1>
+    <label for="filter1">Filtro 1:</label>
+    <input type="text" id="filter1">
+    <!-- Agrega más filtros según sea necesario -->
+   <!-- <button onclick="applyFilters()">Aplicar Filtros</button>-->
+     <table id="dataTable">
+      <!-- La tabla se generará dinámicamente utilizando JavaScript -->
+    </table>
+    <script>
+      function applyFilters() {
+        var filter1 = document.getElementById('filter1').value;
+        // Agrega más variables para capturar los valores de los otros filtros
+        // Ejemplo: var filter2 = document.getElementById('filter2').value;
+        // var filter3 = document.getElementById('filter3').value;
+
+        // Concatena los valores de los filtros separados por comas
+        var filterValues = filter1; // + ',' + filter2 + ',' + filter3;
+
+         google.script.run.withSuccessHandler().showTableWithDesign();
+      }
+      google.script.run.withSuccessHandler(showData).getDataFromSheet();
+
+       function showData(data) {
+        console.log(data);
+        var table = document.getElementById('dataTable');
+        var tableHtml = "<tr>";
+        for (var i = 0; i < data[0].length; i++) {
+          tableHtml += "<th>" + data[0][i] + "</th>";
+        }
+        tableHtml += "</tr>";
+
+        for (var i = 1; i < data.length; i++) {
+          tableHtml += "<tr>";
+          for (var j = 0; j < data[i].length; j++) {
+            tableHtml += "<td>" + data[i][j] + "</td>";
+          }
+          tableHtml += "</tr>";
+        }
+
+        table.innerHTML = tableHtml;
+      }
+    </script>
+  </body>
+</html>
