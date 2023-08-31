@@ -1,0 +1,66 @@
+//Creación de un histograma 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Histograma de las edades de las personas encuestadas</title>
+<!-- Import Google Charts library -->
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+  }
+  #chart {
+    width: 80%;
+    max-width: 600px;
+  }
+</style>
+</head>
+<body>
+  <div id="chart"></div>
+  <script>
+    google.charts.load('current', {packages: ['corechart']});
+    google.charts.setOnLoadCallback(drawHistogram);
+
+    function drawHistogram() {
+      var data = new google.visualization.DataTable();
+      data.addColumn('string', 'Age Range');
+      data.addColumn('number', 'Quantity');
+
+      // Replace with your histogram data
+      var ageData = [
+        ['[12 - 17]', 1],
+        ['[18 - 26]', 33],
+        ['[27 - 59]', 26],
+        ['[60 or more]', 0]
+      ];
+
+      data.addRows(ageData);
+
+      var options = {
+        title: 'Histograma de las edades de las personas encuestadas',
+        legend: { position: 'none' },
+        bars: 'vertical',
+        bar: { groupWidth: '100%', color: '#FFE699' }
+      };
+
+      var chart = new google.visualization.ColumnChart(document.getElementById('chart'));
+      chart.draw(data, options);
+    }
+  </script>
+</body>
+</html>
+
+//Función Apps Scripts para correr histograma 
+function doGet() {
+  return HtmlService.createHtmlOutputFromFile('index')
+    .setTitle('Histogram Example');
+}
